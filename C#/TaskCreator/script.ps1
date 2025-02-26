@@ -29,11 +29,28 @@ if ($inputDateTime -gt $lastWakeDateTime) {
 } else {
     Write-Output "Input time is earlier than the last wake time. Executing power action."
 
-    Add-Type -AssemblyName System.Windows.Forms
-    $PowerState = [System.Windows.Forms.PowerState]::Suspend;
-    $Force = $true;
-    $DisableWake = $false;
-    [System.Windows.Forms.Application]::SetSuspendState($PowerState, $Force, $DisableWake);
+    # Based on the provided power action, you can execute the necessary command
+    if ($powerAction -eq "sleep") {
+        # load assembly System.Windows.Forms which will be used
+        Add-Type -AssemblyName System.Windows.Forms
+
+        # set powerstate to suspend (sleep mode)
+        $PowerState = [System.Windows.Forms.PowerState]::Suspend;
+
+        # do not force putting Windows to sleep
+        $Force = $false;
+
+        # so you can wake up your computer from sleep
+        $DisableWake = $false;
+
+        # do it! Set computer to sleep
+        [System.Windows.Forms.Application]::SetSuspendState($PowerState, $Force, $DisableWake);
+    } elseif ($powerAction -eq "shutdown") {
+        Write-Output "Performing shutdown..."
+        # Example shutdown command (you can modify based on needs)
+        # Stop-Computer -Force
+    } else {
+        Write-Output "Unknown power action: $powerAction"
     }
 }
 
