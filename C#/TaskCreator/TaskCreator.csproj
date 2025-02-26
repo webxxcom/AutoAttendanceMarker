@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Nure.NET" Version="1.0.3" />
+    <PackageReference Include="Serilog" Version="4.2.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+    <PackageReference Include="TaskScheduler" Version="2.11.0" />
+    <None Include="H:\repos\AutoAttendanceMarker\C#\TaskCreator\bin\Debug\net8.0-windows\login_script.exe" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="H:\repos\AutoAttendanceMarker\C#\TaskCreator\bin\Debug\net8.0-windows\script.exe" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

@@ -3,3 +3,7 @@
 /C\#/.vs
 /C\#/RunTaskScript/obj
 /C\#/RunTaskScript/bin
+C\#/RunTaskScript/publish/logs.log
+/C\#/TaskCreator/bin
+/C\#/TaskCreator/obj
+/C\#/TaskCreator/Properties
