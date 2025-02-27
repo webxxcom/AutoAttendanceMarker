@@ -4,7 +4,7 @@
     <_LastSelectedProfileId>H:\repos\AutoAttendanceMarker\C#\TaskCreator\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="Form1.cs">
+    <Compile Update="TaskCreatorForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
