@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+H:/repos/AutoAttendanceMarker/C\#/TaskCreator/publish/TaskCreator.exe filter=lfs diff=lfs merge=lfs -text
+*.exe filter=lfs diff=lfs merge=lfs -text
+H:/repos/AutoAttendanceMarker/TaskCreator.zip filter=lfs diff=lfs merge=lfs -text
