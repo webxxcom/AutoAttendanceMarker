@@ -5,7 +5,8 @@
 - [Project Components](#project-components)
 - [System Configuration](#how-to-enable-wake-timers-in-windows)  
 - [System Workflow](#system-workflow)  
-- [How to Use](#how-to-use)  
+- [How to Use](#how-to-use)
+- [How to Install](#how-to-install)  
 
 ## **Project Overview**
 This project automates attendance marking for online lectures. The app can wake the computer to mark the attendance and go to sleep. It provides a simple UI where users can enter their credentials and configure the system to mark attendance at a scheduled time.
@@ -92,3 +93,21 @@ Task Scheduler is unable to turn on your computer itself but it can wake it up f
    - If attendance is not marked, check the logs in the Python script folder.
    - Errors such as **invalid login credentials** or **network issues** will be recorded.
    - If other errors occured please submit an **issue** in the correspondent section with the logs file.
+
+## **How to Install**
+
+To install and use the **Automated Attendance Marking System**, follow these steps:
+
+1. **Download the Release**
+   - Go to the **Publish** directory of the project.
+   - Download the latest release, which contains the necessary files to run the system.
+
+2. **Extract the Files**
+   - Extract the contents of the release ZIP (if applicable) to a location of your choice on your PC.
+
+3. **Running the Application**
+   - Double-click **TaskCreator.exe** to run the application.
+   - The application will open, and you will be presented with the user interface.
+
+If you run into any issues, review the logs for more details.
+
