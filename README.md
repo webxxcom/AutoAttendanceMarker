@@ -9,7 +9,7 @@
 - [Requirements](#requirements)  
 
 ## **Project Overview**
-This project automates attendance marking for online lectures. It provides a simple UI where users can enter their credentials and configure the system to mark attendance at a scheduled time.
+This project automates attendance marking for online lectures. The app can wake the computer to mark the attendance and go to sleep. It provides a simple UI where users can enter their credentials and configure the system to mark attendance at a scheduled time.
 
 ## **Project Components**
 The project consists of two main components:
@@ -31,7 +31,7 @@ The project consists of two main components:
 
 ## **How to Enable Wake Timers in Windows**
 
-Wake timers allow scheduled tasks to wake the computer from sleep mode automatically. Follow these steps to enable them:
+Task Scheduler is unable to turn on your computer itself but it can wake it up from sleep. Hence you should configure your system for Task Scheduler to be able to wake your PC. Follow these steps to enable them:
 
 ### **Method 1: Using Power Options (Recommended)**
 1. **Open Power Options**  
