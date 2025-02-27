@@ -39,6 +39,8 @@
             saveButton = new Button();
             label4 = new Label();
             timerOffsetNumeric = new NumericUpDown();
+            sourceCodeLinkLabel = new LinkLabel();
+            reportIssueLinkLabel = new LinkLabel();
             ((System.ComponentModel.ISupportInitialize)timerOffsetNumeric).BeginInit();
             SuspendLayout();
             // 
@@ -138,11 +140,35 @@
             timerOffsetNumeric.TabIndex = 10;
             timerOffsetNumeric.TextAlign = HorizontalAlignment.Center;
             // 
+            // sourceCodeLinkLabel
+            // 
+            sourceCodeLinkLabel.AutoSize = true;
+            sourceCodeLinkLabel.Location = new Point(314, 525);
+            sourceCodeLinkLabel.Name = "sourceCodeLinkLabel";
+            sourceCodeLinkLabel.Size = new Size(74, 15);
+            sourceCodeLinkLabel.TabIndex = 11;
+            sourceCodeLinkLabel.TabStop = true;
+            sourceCodeLinkLabel.Text = "Source Code";
+            sourceCodeLinkLabel.LinkClicked += LinkLabel1_LinkClicked;
+            // 
+            // reportIssueLinkLabel
+            // 
+            reportIssueLinkLabel.AutoSize = true;
+            reportIssueLinkLabel.Location = new Point(314, 501);
+            reportIssueLinkLabel.Name = "reportIssueLinkLabel";
+            reportIssueLinkLabel.Size = new Size(71, 15);
+            reportIssueLinkLabel.TabIndex = 12;
+            reportIssueLinkLabel.TabStop = true;
+            reportIssueLinkLabel.Text = "Report issue";
+            reportIssueLinkLabel.LinkClicked += reportIssueLinkLabel_LinkClicked;
+            // 
             // AutoMarker
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(400, 497);
+            ClientSize = new Size(400, 549);
+            Controls.Add(reportIssueLinkLabel);
+            Controls.Add(sourceCodeLinkLabel);
             Controls.Add(timerOffsetNumeric);
             Controls.Add(label4);
             Controls.Add(saveButton);
@@ -175,5 +201,7 @@
         private Button saveButton;
         private Label label4;
         private NumericUpDown timerOffsetNumeric;
+        private LinkLabel sourceCodeLinkLabel;
+        private LinkLabel reportIssueLinkLabel;
     }
 }

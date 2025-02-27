@@ -18,24 +18,16 @@ namespace Automation
         public void CreateTasks()
         {
             Log.Information("<<<<Application started>>>>");
-            //var eventItem = new Event
-            //{
-            //    Subject = new Subject { Title = "Philosophy", Id = 123 },
-            //    StartTime = DateTimeOffset.Now.ToUnixTimeSeconds() + 60 - 3600
-            //};
 
-            IEnumerable<Event> events = GetEvents().Take(1);
+            IEnumerable<Event> events = GetEvents();
             Log.Information("The groups were successfully retrieved from CIST");
-            foreach (Event eventItem in events)
+            foreach (Event eventItem in events.Where(ev => ev.StartTime.HasValue))
             {
-                if (eventItem.StartTime.HasValue)
-                {
-                    CreateTaskForEvent(eventItem);
-                    Log.Information("Task for {Title} on {StartTime} was created", eventItem.Subject.Title,
-                        DateTimeOffset.FromUnixTimeSeconds((long)eventItem.StartTime).DateTime.ToLongDateString);
-                }
-                Log.Information("All events were created.\n\n");
+                CreateTaskForEvent(eventItem);
+                Log.Information("Task for {Title} on {StartTime} was created", eventItem.Subject.Title,
+                    DateTimeOffset.FromUnixTimeSeconds((long)eventItem.StartTime).DateTime.ToLongDateString());
             }
+            Log.Information("All events were created.\n\n");
         }
 
         public void CreateTaskForEvent(Event ev)

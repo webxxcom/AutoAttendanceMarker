@@ -2,6 +2,7 @@ using Automation;
 using Nure.NET;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Security.Policy;
 using Utils;
 
 namespace TaskCreatorUI
@@ -79,16 +80,16 @@ namespace TaskCreatorUI
         private void TestButton_Click(object sender, EventArgs e)
         {
             Func<string, string> error_message = txt => $"Unable to test dl.nure.ua login without {txt}. Please fill the correspondent field";
-            
+
             string? username = DataUtils.GetNullableFromConfig(usernameConfigName);
-            if(username == null)
+            if (username == null)
             {
                 MessageBox.Show(error_message("username"));
                 return;
             }
 
             string? password = DataUtils.GetNullableFromConfig(passwordConfigName);
-            if(password == null)
+            if (password == null)
             {
                 MessageBox.Show(error_message("password"));
                 return;
@@ -98,7 +99,7 @@ namespace TaskCreatorUI
             {
                 FileName = DataUtils.GetExecutablePath("login_script.exe"),
                 Arguments = $"{username} {password}",
-                RedirectStandardOutput = true,  
+                RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 UseShellExecute = false,
                 CreateNoWindow = true
@@ -108,11 +109,29 @@ namespace TaskCreatorUI
             process.Start();
             process.WaitForExit();
 
-            string exitMessage = process.ExitCode == 1 
+            string exitMessage = process.ExitCode == 1
                 ? "The login data is correct and dl.nure.ua can be accessed using these credentials"
                 : $"The application was unable to access dl.nure.ua using current credentials: " +
                 $"{username}, {password}. Maybe you forgot to save your entered data?";
             MessageBox.Show(exitMessage);
+        }
+
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = DataUtils.GetFromConfig("GithubSourceLink"),
+                UseShellExecute = true
+            });
+        }
+
+        private void reportIssueLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = DataUtils.GetFromConfig("GithubSourceLink") + "/issues",
+                UseShellExecute = true
+            });
         }
     }
 }
