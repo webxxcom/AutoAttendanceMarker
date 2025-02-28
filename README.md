@@ -99,11 +99,11 @@ Task Scheduler is unable to turn on your computer itself but it can wake it up f
 To install and use the **Automated Attendance Marking System**, follow these steps:
 
 1. **Download the Release**
-   - Go to the **Publish** directory of the project.
-   - Download the latest release, which contains the necessary files to run the system.
+   - Go to the [Release zip file](Release.zip/) of the project.
+   - Download the release, which contains the necessary files to run the system.
 
 2. **Extract the Files**
-   - Extract the contents of the release ZIP (if applicable) to a location of your choice on your PC.
+   - Extract the contents of the ZIP to a location of your choice on your PC.
 
 3. **Running the Application**
    - Locate the executable file **TaskCreator.exe**.
