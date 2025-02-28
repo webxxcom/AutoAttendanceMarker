@@ -1,58 +1,19 @@
-﻿using Nure.NET.Types;
-using Microsoft.Win32.TaskScheduler;
+﻿using Microsoft.Win32.TaskScheduler;
 using Utils;
-using Serilog;
 
 namespace Automation
 {
-    public class TaskCreator
+    public static class TaskCreator
     {
-        public required string Username { get; init; }
-        public required string Password { get; init; }
-        public required string GroupName { get; init; }
-        public required int StartOffsetMinutes { get; init; }
+        private static string PowerActionScriptPath { get; } = DataUtils.GetExecutablePath("script.ps1");
 
-        private string MarkerScriptPath { get; } = DataUtils.GetExecutablePath("script.exe");
-        private string PowerActionScriptPath { get; } = DataUtils.GetExecutablePath("script.ps1");
-
-        public void CreateTasks()
+        public static void CreateTask(string name, string description, DateTime startTime, ICollection<ExecAction> actions)
         {
-            Log.Information("<<<<Application started>>>>");
-
-            IEnumerable<Event> events = GetEvents();
-            Log.Information("The groups were successfully retrieved from CIST");
-            foreach (Event eventItem in events.Where(ev => ev.StartTime.HasValue))
-            {
-                CreateTaskForEvent(eventItem);
-                Log.Information("Task for {Title} on {StartTime} was created", eventItem.Subject.Title,
-                    DateTimeOffset.FromUnixTimeSeconds((long)eventItem.StartTime).DateTime.ToLongDateString());
-            }
-            Log.Information("All events were created.\n\n");
-        }
-
-        public void CreateTaskForEvent(Event ev)
-        {
-            if (!ev.StartTime.HasValue)
-            {
-                // If event does not have a start time neither create a task nor notify use about it
-                return;
-            }
-
-            // Get all required data
-            string subjectTitle = ev.Subject?.Title ?? "";
-
-            // Vars for task settings
-            DateTime taskStartTimeLocal = DateTime
-                .SpecifyKind(DateTimeOffset.FromUnixTimeSeconds(ev.StartTime.Value).DateTime, DateTimeKind.Utc)
-                .ToLocalTime().AddMinutes(StartOffsetMinutes);
-            long taskStartTimeUnix = (long)(taskStartTimeLocal - DateTime.UnixEpoch).TotalSeconds ;
-            string taskName = $"{subjectTitle}_Attendance_At_{taskStartTimeLocal:yyyyMMdd_HHmm}";
-
             using TaskService ts = new();
             TaskDefinition td = ts.NewTask();
 
             // Task settings
-            td.RegistrationInfo.Description = $"Automatically marks the attendance for {subjectTitle} at {taskStartTimeLocal:yyyyMMdd_HHmm}";
+            td.RegistrationInfo.Description = description;
             td.Settings.AllowDemandStart = true;
             td.Settings.Enabled = true;
             td.Settings.WakeToRun = true;
@@ -60,38 +21,27 @@ namespace Automation
             td.Settings.DisallowStartIfOnBatteries = false;
 
             // Time when task is triggered
-            td.Triggers.Add(new TimeTrigger { StartBoundary = taskStartTimeLocal });
+            td.Triggers.Add(new TimeTrigger { StartBoundary = startTime });
 
-            // Action to execute
-            td.Actions.Add(new ExecAction(MarkerScriptPath, $"{Username} {Password}", null));
-            AddActionToSleep(td, taskStartTimeUnix);
+            //Actions to trigger
+            td.Actions.AddRange(actions);
 
-            ts.RootFolder.RegisterTaskDefinition(taskName, td);
+            ts.RootFolder.RegisterTaskDefinition(name, td);
         }
 
-        private void AddActionToSleep(TaskDefinition td, long taskTimeStart)
+        public static ExecAction GetActionToSleep(long taskTimeStart, bool hibernate)
         {
             string powershellExePath = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.System),
                 @"WindowsPowerShell\v1.0\powershell.exe"
             );
-            string scriptParams = $"-inputTime {taskTimeStart}";
+            string scriptParams = $"-inputTime {taskTimeStart} -hibernate {(hibernate ? 1 : 0)}";
 
-            td.Actions.Add(new ExecAction(
+            return new ExecAction(
                 powershellExePath,
                 $"-ExecutionPolicy Bypass -File \"{PowerActionScriptPath}\" {scriptParams}",
                 null
-            ));
-        }
-
-        private List<Event> GetEvents()
-        {
-            Console.WriteLine($"Fetching schedule for group: {GroupName}");
-
-            long currentUnixTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-            return ScheduleFetcher.GetClassesForGroup(GroupName)
-                .Where(eventItem => eventItem.StartTime.HasValue && eventItem.StartTime.Value > currentUnixTimestamp)
-                .ToList();
+            );
         }
     }
 }

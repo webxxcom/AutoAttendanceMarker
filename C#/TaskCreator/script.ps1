@@ -1,6 +1,6 @@
 param (
-    [string]$inputTime,  # Input time in format 'yyyy-MM-ddTHH:mm:ss'
-    [string]$powerAction  # Power action (e.g., "sleep", "shutdown")
+    [int]$inputTime,  # Input time in UnixSeconds
+    [int]$hibernate  # Whether to hibernate or not, passed as 1 or 0
 )
 
 # Get the last wake time from the system logs
@@ -18,12 +18,14 @@ $inputDateTime = (Get-Date "1970-01-01 00:00:00").AddSeconds($inputTime)
 if ($inputDateTime -gt $lastWakeDateTime) {
     Write-Output "Input time is greater than the last wake time. No action will be taken."
 } else {
-    Write-Output "Input time is earlier than the last wake time. Executing power action."
-    if ($powerAction -eq "sleep") {
-        Add-Type -AssemblyName System.Windows.Forms
-        $PowerState = [System.Windows.Forms.PowerState]::Suspend;
-        $Force = $false;
-        $DisableWake = $false;
-        [System.Windows.Forms.Application]::SetSuspendState($PowerState, $Force, $DisableWake);
+    Add-Type -AssemblyName System.Windows.Forms
+    if ($hibernate -eq 1) {
+        $PowerState = [System.Windows.Forms.PowerState]::Hibernate
+    } else {
+        $PowerState = [System.Windows.Forms.PowerState]::Suspend
+    }
+    
+    $Force = $false
+    $DisableWake = $false
+    [System.Windows.Forms.Application]::SetSuspendState($PowerState, $Force, $DisableWake)
 }
-

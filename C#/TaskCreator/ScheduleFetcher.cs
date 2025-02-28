@@ -8,12 +8,6 @@ namespace Automation
         public static List<Event> GetClassesForGroup(string groupName)
         {
             var group = GetGroupByName(groupName);
-            if (group == null)
-            {
-                Console.WriteLine($"Group {groupName} not found.");
-                return [];
-            }
-
             long startTime2025 = new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds();
             long endTime = new DateTimeOffset(DateTime.MaxValue).ToUnixTimeSeconds();
 
@@ -27,10 +21,11 @@ namespace Automation
             return groupSchedule ?? [];
         }
 
-        private static Group? GetGroupByName(string groupName)
+        private static Group GetGroupByName(string groupName)
         {
             List<Group>? groups = Cist.GetGroups();
-            return groups?.Find(group => group.Name.Equals(groupName, StringComparison.OrdinalIgnoreCase));
+            return groups?.Find(group => group.Name.Equals(groupName, StringComparison.OrdinalIgnoreCase))
+                ?? throw new ArgumentException($"Group {groupName} not found.");
         }
     }
 }

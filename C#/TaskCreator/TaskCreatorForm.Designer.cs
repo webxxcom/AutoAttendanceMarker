@@ -34,13 +34,16 @@
             passwordField = new TextBox();
             label3 = new Label();
             groupsComboBox = new ComboBox();
-            testButton = new Button();
+            testLoginButton = new Button();
             runButton = new Button();
             saveButton = new Button();
             label4 = new Label();
             timerOffsetNumeric = new NumericUpDown();
             sourceCodeLinkLabel = new LinkLabel();
             reportIssueLinkLabel = new LinkLabel();
+            testWakeButton = new Button();
+            label5 = new Label();
+            powerActionComboBox = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)timerOffsetNumeric).BeginInit();
             SuspendLayout();
             // 
@@ -93,19 +96,19 @@
             groupsComboBox.Size = new Size(121, 23);
             groupsComboBox.TabIndex = 5;
             // 
-            // testButton
+            // testLoginButton
             // 
-            testButton.Location = new Point(25, 285);
-            testButton.Name = "testButton";
-            testButton.Size = new Size(121, 40);
-            testButton.TabIndex = 6;
-            testButton.Text = "Test";
-            testButton.UseVisualStyleBackColor = true;
-            testButton.Click += TestButton_Click;
+            testLoginButton.Location = new Point(25, 328);
+            testLoginButton.Name = "testLoginButton";
+            testLoginButton.Size = new Size(121, 40);
+            testLoginButton.TabIndex = 6;
+            testLoginButton.Text = "Test dl login";
+            testLoginButton.UseVisualStyleBackColor = true;
+            testLoginButton.Click += TestButton_Click;
             // 
             // runButton
             // 
-            runButton.Location = new Point(95, 367);
+            runButton.Location = new Point(90, 462);
             runButton.Name = "runButton";
             runButton.Size = new Size(201, 104);
             runButton.TabIndex = 7;
@@ -115,7 +118,7 @@
             // 
             // saveButton
             // 
-            saveButton.Location = new Point(226, 285);
+            saveButton.Location = new Point(135, 397);
             saveButton.Name = "saveButton";
             saveButton.Size = new Size(121, 40);
             saveButton.TabIndex = 8;
@@ -143,7 +146,7 @@
             // sourceCodeLinkLabel
             // 
             sourceCodeLinkLabel.AutoSize = true;
-            sourceCodeLinkLabel.Location = new Point(314, 525);
+            sourceCodeLinkLabel.Location = new Point(316, 615);
             sourceCodeLinkLabel.Name = "sourceCodeLinkLabel";
             sourceCodeLinkLabel.Size = new Size(74, 15);
             sourceCodeLinkLabel.TabIndex = 11;
@@ -154,26 +157,56 @@
             // reportIssueLinkLabel
             // 
             reportIssueLinkLabel.AutoSize = true;
-            reportIssueLinkLabel.Location = new Point(314, 501);
+            reportIssueLinkLabel.Location = new Point(316, 590);
             reportIssueLinkLabel.Name = "reportIssueLinkLabel";
             reportIssueLinkLabel.Size = new Size(71, 15);
             reportIssueLinkLabel.TabIndex = 12;
             reportIssueLinkLabel.TabStop = true;
             reportIssueLinkLabel.Text = "Report issue";
-            reportIssueLinkLabel.LinkClicked += reportIssueLinkLabel_LinkClicked;
+            reportIssueLinkLabel.LinkClicked += ReportIssueLinkLabel_LinkClicked;
+            // 
+            // testWakeButton
+            // 
+            testWakeButton.Location = new Point(246, 328);
+            testWakeButton.Name = "testWakeButton";
+            testWakeButton.Size = new Size(121, 40);
+            testWakeButton.TabIndex = 13;
+            testWakeButton.Text = "Test wake timer";
+            testWakeButton.UseVisualStyleBackColor = true;
+            testWakeButton.Click += TestWakeButton_Click;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(8, 238);
+            label5.Name = "label5";
+            label5.Size = new Size(76, 15);
+            label5.TabIndex = 14;
+            label5.Text = "Power action";
+            // 
+            // powerActionComboBox
+            // 
+            powerActionComboBox.FormattingEnabled = true;
+            powerActionComboBox.Location = new Point(100, 235);
+            powerActionComboBox.Name = "powerActionComboBox";
+            powerActionComboBox.Size = new Size(121, 23);
+            powerActionComboBox.TabIndex = 15;
             // 
             // AutoMarker
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(400, 549);
+            ClientSize = new Size(400, 637);
+            Controls.Add(powerActionComboBox);
+            Controls.Add(label5);
+            Controls.Add(testWakeButton);
             Controls.Add(reportIssueLinkLabel);
             Controls.Add(sourceCodeLinkLabel);
             Controls.Add(timerOffsetNumeric);
             Controls.Add(label4);
             Controls.Add(saveButton);
             Controls.Add(runButton);
-            Controls.Add(testButton);
+            Controls.Add(testLoginButton);
             Controls.Add(groupsComboBox);
             Controls.Add(label3);
             Controls.Add(passwordField);
@@ -196,12 +229,15 @@
         private TextBox passwordField;
         private Label label3;
         private ComboBox groupsComboBox;
-        private Button testButton;
+        private Button testLoginButton;
         private Button runButton;
         private Button saveButton;
         private Label label4;
         private NumericUpDown timerOffsetNumeric;
         private LinkLabel sourceCodeLinkLabel;
         private LinkLabel reportIssueLinkLabel;
+        private Button testWakeButton;
+        private Label label5;
+        private ComboBox powerActionComboBox;
     }
 }
