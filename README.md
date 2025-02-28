@@ -31,9 +31,8 @@ The project consists of two main components:
 
 ## **How to Enable Wake Timers in Windows**
 
-Task Scheduler is unable to turn on your computer itself but it can wake it up from sleep. Hence you should configure your system for Task Scheduler to be able to wake your PC. Follow these steps to enable them:
+IF you want **Task Creator** to work even when you're not home you should allow it to wake your PC. Task Scheduler is unable to turn on your computer itself but it can wake it up from sleep. Hence you should configure your system for Task Scheduler to be able to wake your PC. Follow these steps to enable them:
 
-### **Method 1: Using Power Options**
 1. **Open Power Options**  
    - Press `Win + R`, type `control powercfg.cpl`, and press `Enter`.
 
@@ -51,6 +50,8 @@ Task Scheduler is unable to turn on your computer itself but it can wake it up f
 
 5. **Apply Changes**
    - Click **Apply** and **OK** to save the settings.
+
+**Note**: there is no 100% assurance that your laptop will be turned on because some laptop may forbid the wake timers on BIOS level and the configuration depends on each model, you can browser the internet to find out.
 
 ## **System Workflow**
 1. **User Input (C# UI)**
