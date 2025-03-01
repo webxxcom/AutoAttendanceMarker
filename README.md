@@ -100,8 +100,8 @@ IF you want **Task Creator** to work even when you're not home you should allow 
 To install and use the **Automated Attendance Marking System**, follow these steps:
 
 1. **Download the Release**
-   - Go to the [Release zip file](Release.zip/) of the project.
-   - Download the release, which contains the necessary files to run the system.
+   - Go to the [Beta release page](https://github.com/webxxcom/AutoAttendanceMarker/releases/tag/BV10) of the project.
+   - Download the **Release.zip**, which contains the necessary files to run the system.
 
 2. **Extract the Files**
    - Extract the contents of the ZIP to a location of your choice on your PC.
